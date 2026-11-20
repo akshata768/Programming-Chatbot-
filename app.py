@@ -1,6 +1,30 @@
 import streamlit as st
 
-st.set_page_config(page_title="Programming Chatbot", page_icon="💻")
+with st.sidebar:
+
+    st.title("🎓 Programming Tutor")
+
+    st.header("👥 Team Members")
+    st.write("1. Akshata")
+    st.write("2. Team Member 2")
+    st.write("3. Team Member 3")
+
+    st.divider()
+
+    st.header("💻 Programming Languages")
+
+    language = st.radio(
+        "Select Language",
+        ["C", "Java", "Python"]
+    )
+
+    st.divider()
+
+    st.header("📚 Wikipedia")
+
+    st.markdown("[C](https://en.wikipedia.org/wiki/C_(programming_language))")
+    st.markdown("[Java](https://en.wikipedia.org/wiki/Java_(programming_language))")
+    st.markdown("[Python](https://en.wikipedia.org/wiki/Python_(programming_language))")
 
 st.title("💻 Programming Chatbot")
 st.write("Learn C, Python, and Java in one place!")
