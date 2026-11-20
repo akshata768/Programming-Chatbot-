@@ -1,30 +1,53 @@
 import streamlit as st
 
+# SIDEBAR
+
+if "selected_page" not in st.session_state:
+    st.session_state.selected_page = "Pipeline"
+
 with st.sidebar:
 
     st.title("🎓 Programming Tutor")
 
-    st.header("👥 Team Members")
+    if st.button("📘 Pipeline", use_container_width=True):
+        st.session_state.selected_page = "Pipeline"
+
+    if st.button("👥 Info", use_container_width=True):
+        st.session_state.selected_page = "Info"
+        # PAGE CONTENT
+
+if st.session_state.selected_page == "Pipeline":
+
+    st.title("📘 About Our Project")
+
+    st.write("""
+    Programming Tutor Chatbot is an AI-based
+    learning application for C, Java, and Python.
+    """)
+
+    st.subheader("🎯 Project Purpose")
+    st.write("To help students learn programming easily.")
+
+    st.subheader("⚙️ How It Works")
+
+    st.write("""
+    1. Select a programming language.
+    2. Upload your code.
+    3. Ask a question.
+    4. Click Ask AI.
+    5. Get an answer.
+    """)
+
+elif st.session_state.selected_page == "Info":
+
+    st.title("👥 Team Information")
+
     st.write("1. Akshata")
     st.write("2. Team Member 2")
     st.write("3. Team Member 3")
 
-    st.divider()
-
-    st.header("💻 Programming Languages")
-
-    language = st.radio(
-        "Select Language",
-        ["C", "Java", "Python"]
-    )
-
-    st.divider()
-
-    st.header("📚 Wikipedia")
-
-    st.markdown("[C](https://en.wikipedia.org/wiki/C_(programming_language))")
-    st.markdown("[Java](https://en.wikipedia.org/wiki/Java_(programming_language))")
-    st.markdown("[Python](https://en.wikipedia.org/wiki/Python_(programming_language))")
+    st.subheader("💻 Technologies Used")
+    st.write("Python, Streamlit, Groq AI, GitHub")
 
 st.title("💻 Programming Chatbot")
 st.write("Learn C, Python, and Java in one place!")
