@@ -1,202 +1,271 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CodeVerse AI</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming AI Chatbot</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
+<div class="main-container">
 
-  <aside class="sidebar">
-    <h2>✦ CodeVerse AI</h2>
-    <p class="side-text">Your Programming Companion</p>
-
-    <div class="side-menu active">💬 &nbsp; New Chat</div>
-    <div class="side-menu">💻 &nbsp; Learn Programming</div>
-    <div class="side-menu">📚 &nbsp; Code Examples</div>
-
-    <div class="sidebar-bottom">
-      <div class="profile">
-        <div class="avatar">AI</div>
-        <div>
-          <strong>Programming AI</strong>
-          <small> C · Python · Java</small>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <main class="main">
-
-    <div class="topbar">
-      <span>✦ CodeVerse</span>
-      <span class="online">● Online</span>
-    </div>
-
-    <section class="welcome">
-      <div class="logo">✦</div>
-      <h1>Learn to code.<br><span>Create the future.</span></h1>
-      <p>Your AI programming assistant for C, Python and Java.<br>
-      Ask questions, explore concepts, and learn coding step by step.</p>
-    </section>
+    <header class="header">
+        <h1>💻 Programming AI Chatbot</h1>
+        <p>Your Personal Coding Assistant ✨</p>
+        <p>Learn C, Python & Java in a simple way</p>
+    </header>
 
     <section class="language-cards">
-      <div class="language-card c-card" onclick="selectLanguage('C')">
-        <div class="lang-icon">C</div>
-        <h3>C Programming</h3>
-        <p>Learn logic, pointers, arrays and memory.</p>
-        <span>Explore C →</span>
-      </div>
+        <div class="language-card c-card" onclick="selectLanguage('C')">
+            <h2>🧡 C Programming</h2>
+            <p>Learn basics, loops, arrays and functions</p>
+        </div>
 
-      <div class="language-card python-card" onclick="selectLanguage('Python')">
-        <div class="lang-icon">🐍</div>
-        <h3>Python</h3>
-        <p>Learn syntax, functions and automation.</p>
-        <span>Explore Python →</span>
-      </div>
+        <div class="language-card python-card" onclick="selectLanguage('Python')">
+            <h2>💚 Python</h2>
+            <p>Learn Python with simple examples</p>
+        </div>
 
-      <div class="language-card java-card" onclick="selectLanguage('Java')">
-        <div class="lang-icon">☕</div>
-        <h3>Java</h3>
-        <p>Learn OOP, classes and applications.</p>
-        <span>Explore Java →</span>
-      </div>
+        <div class="language-card java-card" onclick="selectLanguage('Java')">
+            <h2>💙 Java</h2>
+            <p>Learn classes, objects and programs</p>
+        </div>
     </section>
 
-    <div class="chat-area" id="chat-box">
-      <div class="bot-message">
-        <div class="bot-avatar">✦</div>
-        <div class="message-content">
-          <strong>Hello, coder! 👋</strong>
-          <p>I'm your programming assistant. Select a language and ask me anything about coding. I'll help you understand it with simple explanations and examples.</p>
+    <div class="chat-container">
+
+        <div class="chat-header">
+            <h2>💬 Ask a Question</h2>
+            <p id="selected-language">Select C, Python or Java to start</p>
         </div>
-      </div>
+
+        <div id="chat-box" class="chat-box">
+            <div class="bot-message">
+                👋 Hi! Welcome to Programming AI Chatbot.<br><br>
+                Select a programming language above and ask me any coding question!
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="user-input"
+                   placeholder="Ask your programming question...">
+            <button onclick="sendMessage()">Send ➤</button>
+        </div>
+
     </div>
 
-    <div class="suggestions">
-      <button onclick="askSuggestion('Explain loops with examples')">🔄 Explain loops</button>
-      <button onclick="askSuggestion('What is an array?')">📦 Arrays</button>
-      <button onclick="askSuggestion('Explain functions step by step')">⚡ Functions</button>
-      <button onclick="askSuggestion('Give me a beginner program')">💻 Beginner program</button>
-    </div>
-
-    <div class="input-container">
-      <select id="language">
-        <option value="C">C</option>
-        <option value="Python" selected>Python</option>
-        <option value="Java">Java</option>
-      </select>
-
-      <input id="user-input" type="text" placeholder="Ask anything about programming...">
-
-      <button class="send-btn" onclick="sendMessage()">➤</button>
-    </div>
-
-    <footer>CodeVerse AI · Learn something new every day ✨</footer>
-
-  </main>
 </div>
 
 <script>
+
+let selectedLang = "";
+
 function selectLanguage(lang) {
-  document.getElementById("language").value = lang;
-  document.getElementById("user-input").placeholder =
-    "Ask a " + lang + " programming question...";
-}
+    selectedLang = lang;
 
-function askSuggestion(question) {
-  document.getElementById("user-input").value = question;
-  sendMessage();
-}
+    document.getElementById("selected-language").innerText =
+        "✨ Selected Language: " + lang;
 
-function addMessage(text, type) {
-  const box = document.getElementById("chat-box");
-  const div = document.createElement("div");
-  div.className = type;
-  div.innerHTML = type === "user-message"
-    ? `<div class="user-bubble"></div>`
-    : `<div class="bot-avatar">✦</div><div class="message-content"></div>`;
-
-  if (type === "user-message") {
-    div.querySelector(".user-bubble").textContent = text;
-  } else {
-    div.querySelector(".message-content").textContent = text;
-  }
-
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-}
-
-function getAnswer(lang, q) {
-  if (q.includes("loop")) {
-    return lang + " loops are used to repeat a block of code.\n\nTypes:\n• for loop\n• while loop\n• do-while loop (where supported)\n\nLoops help us avoid writing the same code many times.";
-  }
-
-  if (q.includes("array")) {
-    return "An array stores multiple values of the same data type.\n\nExample:\nint numbers[3] = {10, 20, 30};\n\nArrays allow us to store and access values using indexes.";
-  }
-
-  if (q.includes("function") || q.includes("method")) {
-    if (lang === "Python")
-      return "A function is a reusable block of code.\n\nExample:\ndef greet():\n    print('Hello')\n\ngreet()\n\nThe def keyword defines the function. Calling greet() executes it.";
-    return "A function or method is a reusable block of code that performs a task. It helps organize programs and avoid repetition.";
-  }
-
-  if (q.includes("pointer") && lang === "C") {
-    return "A pointer is a variable that stores the memory address of another variable.\n\nExample:\nint a = 10;\nint *p = &a;\n\nHere, p stores the address of a.";
-  }
-
-  if (q.includes("class") && lang === "Java") {
-    return "A class is a blueprint for creating objects.\n\nExample:\nclass Student {\n    String name;\n}\n\nThe Student class defines the structure of a student object.";
-  }
-
-  if (q.includes("object")) {
-    return "An object is an instance of a class. It represents something that can have data and behavior.";
-  }
-
-  if (q.includes("variable")) {
-    return "A variable is a named storage location used to store data.\n\nExamples:\nC: int age = 20;\nPython: age = 20\nJava: int age = 20;";
-  }
-
-  if (q.includes("hello world") || q.includes("beginner program")) {
-    if (lang === "C")
-      return '#include <stdio.h>\nint main() {\n    printf("Hello World");\n    return 0;\n}';
-    if (lang === "Python")
-      return 'print("Hello World")';
-    return 'class Main {\n    public static void main(String[] args) {\n        System.out.println("Hello World");\n    }\n}';
-  }
-
-  if (q.includes("oops") || q.includes("oop")) {
-    return "OOP means Object-Oriented Programming.\n\nFour important principles:\n1. Encapsulation\n2. Inheritance\n3. Polymorphism\n4. Abstraction\n\nJava is widely used for learning OOP concepts.";
-  }
-
-  if (q.includes("hi") || q.includes("hello")) {
-    return "Hello! 👋 Welcome to CodeVerse AI. Select C, Python or Java and let's learn programming together!";
-  }
-
-  return "Let's learn " + lang + " programming! 😊\n\nI can help with programming concepts, syntax, loops, arrays, functions, classes, examples and beginner programs.\n\nTry asking a specific question so I can explain it step by step.";
+    addBotMessage("You selected " + lang + " 💻. Ask me anything about " + lang + "!");
 }
 
 function sendMessage() {
-  const input = document.getElementById("user-input");
-  const question = input.value.trim();
-  const lang = document.getElementById("language").value;
+    const input = document.getElementById("user-input");
+    const question = input.value.trim();
 
-  if (!question) return;
+    if (question === "") return;
 
-  addMessage(question, "user-message");
-  const answer = getAnswer(lang, question.toLowerCase());
-  addMessage(answer, "bot-message");
+    addUserMessage(question);
+    input.value = "";
 
-  input.value = "";
+    if (selectedLang === "") {
+        addBotMessage("😊 Please select C, Python or Java first!");
+        return;
+    }
+
+    setTimeout(() => {
+        const answer = getAnswer(selectedLang, question);
+        addBotMessage(answer);
+    }, 300);
 }
 
-document.getElementById("user-input").addEventListener("keydown", function(e) {
-  if (e.key === "Enter") sendMessage();
+function addUserMessage(message) {
+    const chatBox = document.getElementById("chat-box");
+    const div = document.createElement("div");
+    div.className = "user-message";
+    div.textContent = message;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function addBotMessage(message) {
+    const chatBox = document.getElementById("chat-box");
+    const div = document.createElement("div");
+    div.className = "bot-message";
+    div.textContent = message;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function getAnswer(lang, q) {
+    const question = q.toLowerCase();
+
+    if (/^(hi|hello|hey|hii|hai)\b/.test(question)) {
+        return "Hello! 👋 Welcome to Programming AI! Ask me about " + lang + " programming, concepts, code or examples.";
+    }
+
+    if (question.includes("loop")) {
+        if (lang === "Python") {
+            return `LOOPS IN PYTHON 🐍
+
+Loops repeat a block of code.
+
+Types:
+1. for loop
+2. while loop
+
+Example:
+for i in range(1, 6):
+    print(i)
+
+Output:
+1
+2
+3
+4
+5`;
+        }
+
+        if (lang === "C") {
+            return `LOOPS IN C 🧡
+
+Loops repeat statements.
+
+Types:
+1. for loop
+2. while loop
+3. do-while loop
+
+Example:
+for(int i=1; i<=5; i++) {
+    printf("%d\\n", i);
+}
+
+Output:
+1
+2
+3
+4
+5`;
+        }
+
+        if (lang === "Java") {
+            return `LOOPS IN JAVA 💙
+
+Loops repeat statements.
+
+Types:
+1. for loop
+2. while loop
+3. do-while loop
+
+Example:
+for(int i=1; i<=5; i++) {
+    System.out.println(i);
+}
+
+Output:
+1
+2
+3
+4
+5`;
+        }
+    }
+
+    if (question.includes("array")) {
+        return lang + " ARRAYS 📚\\n\\nAn array stores multiple values in one variable.\\n\\nArrays are useful for storing and accessing collections of data.\\n\\nAsk me for an array program if you want an example!";
+    }
+
+    if (question.includes("function")) {
+        return lang + " FUNCTIONS ✨\\n\\nA function is a reusable block of code that performs a particular task.\\n\\nFunctions help reduce repeated code and make programs easier to organize.";
+    }
+
+    if (question.includes("variable")) {
+        return lang + " VARIABLES 📝\\n\\nA variable is a named location used to store data.\\n\\nExample values: 10, 3.5, or a name such as Aishu.";
+    }
+
+    if (question.includes("add") || question.includes("addition")) {
+        if (lang === "Python") {
+            return `PYTHON ADDITION PROGRAM 🐍
+
+a = 10
+b = 20
+sum = a + b
+print(sum)
+
+Output:
+30`;
+        }
+
+        if (lang === "C") {
+            return `C ADDITION PROGRAM 🧡
+
+#include <stdio.h>
+int main() {
+    int a=10, b=20;
+    printf("%d", a+b);
+    return 0;
+}
+
+Output:
+30`;
+        }
+
+        if (lang === "Java") {
+            return `JAVA ADDITION PROGRAM 💙
+
+class Main {
+    public static void main(String[] args) {
+        int a=10, b=20;
+        System.out.println(a+b);
+    }
+}
+
+Output:
+30`;
+        }
+    }
+
+    if (question.includes("class") || question.includes("object")) {
+        if (lang === "Java") {
+            return "JAVA CLASS & OBJECT 💙\\n\\nClass: A blueprint used to create objects.\\nObject: An instance of a class.\\n\\nExample:\\nclass Student { }\\n\\nStudent s = new Student();";
+        }
+        return lang + " PROGRAMMING 📚\\n\\nAsk me about variables, functions, loops, arrays or basic programs.";
+    }
+
+    if (question.includes("pointer")) {
+        if (lang === "C") {
+            return "POINTER IN C 🧡\\n\\nA pointer is a variable that stores the memory address of another variable.\\n\\nExample:\\nint a = 10;\\nint *p = &a;";
+        }
+        return "Pointers are mainly taught in C. Ask me about variables, loops, arrays or functions in " + lang + ".";
+    }
+
+    if (question.includes("program")) {
+        return "💡 I can help you with " + lang + " programs!\\n\\nTry asking:\\n• Addition program\\n• Even or odd\\n• Factorial\\n• Fibonacci series\\n• Reverse a number";
+    }
+
+    return "✨ I can help with " + lang + "!\\n\\nTry asking about:\\n• Loops\\n• Arrays\\n• Functions\\n• Variables\\n• Programs\\n• " + (lang === "C" ? "Pointers" : lang === "Java" ? "Classes and objects" : "Lists and strings") + "\\n\\nType a topic to learn more 😊";
+}
+
+document.getElementById("user-input").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
 });
+
 </script>
 
 </body>
