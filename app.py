@@ -2,9 +2,6 @@ import streamlit as st
 
 # SIDEBAR
 
-if "selected_page" not in st.session_state:
-    st.session_state.selected_page = "Pipeline"
-
 with st.sidebar:
 
     st.title("🎓 Programming Tutor")
@@ -14,40 +11,39 @@ with st.sidebar:
 
     if st.button("👥 Info", use_container_width=True):
         st.session_state.selected_page = "Info"
-        # PAGE CONTENT
 
-if st.session_state.selected_page == "Pipeline":
+    st.divider()
 
-    st.title("📘 About Our Project")
+    if st.session_state.selected_page == "Pipeline":
 
-    st.write("""
-    Programming Tutor Chatbot is an AI-based
-    learning application for C, Java, and Python.
-    """)
+        st.subheader("📘 About Our Project")
 
-    st.subheader("🎯 Project Purpose")
-    st.write("To help students learn programming easily.")
+        st.write(
+            "Programming Tutor Chatbot is an AI-based "
+            "learning application for C, Java, and Python."
+        )
 
-    st.subheader("⚙️ How It Works")
+        st.subheader("🎯 Project Purpose")
 
-    st.write("""
-    1. Select a programming language.
-    2. Upload your code.
-    3. Ask a question.
-    4. Click Ask AI.
-    5. Get an answer.
-    """)
+        st.write(
+            "To help students learn programming easily."
+        )
 
-elif st.session_state.selected_page == "Info":
+        st.subheader("⚙️ How It Works")
 
-    st.title("👥 Team Information")
+        st.write("1. Select a programming language.")
+        st.write("2. Upload your code.")
+        st.write("3. Ask a question.")
+        st.write("4. Click Ask AI.")
+        st.write("5. Get an answer.")
 
-    st.write("1. Akshata")
-    st.write("2. Team Member 2")
-    st.write("3. Team Member 3")
+    elif st.session_state.selected_page == "Info":
 
-    st.subheader("💻 Technologies Used")
-    st.write("Python, Streamlit, Groq AI, GitHub")
+        st.subheader("👥 Team Members")
+
+        st.write("1. Akshata")
+        st.write("2. Team Member 2")
+        st.write("3. Team Member 3")
 
 st.title("💻 Programming Chatbot")
 st.write("Learn C, Python, and Java in one place!")
