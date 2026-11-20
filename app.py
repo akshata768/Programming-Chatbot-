@@ -1,8 +1,10 @@
 import streamlit as st
 from groq import Groq
 
-# SIDEBAR
+if "selected_page" not in st.session_state:
+    st.session_state.selected_page = "Pipeline"
 
+# SIDEBAR
 with st.sidebar:
 
     st.title("🎓 Programming Tutor")
