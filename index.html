@@ -1,272 +1,48 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programming AI Chatbot</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<header class="header">
+    <h1>💻 Programming AI Chatbot</h1>
+    <p>Your Personal Coding Assistant</p>
+    <p>Explore C, Python & Java programming</p>
+</header>
 
-<div class="main-container">
+<section class="language-cards">
 
-    <header class="header">
-        <h1>💻 Programming AI Chatbot</h1>
-        <p>Your Personal Coding Assistant ✨</p>
-        <p>Learn C, Python & Java in a simple way</p>
-    </header>
+    <div class="language-card c-card" onclick="selectLanguage('C')">
+        <h2>C</h2>
+        <p>Programming</p>
+    </div>
 
-    <section class="language-cards">
-        <div class="language-card c-card" onclick="selectLanguage('C')">
-            <h2>🧡 C Programming</h2>
-            <p>Learn basics, loops, arrays and functions</p>
+    <div class="language-card python-card" onclick="selectLanguage('Python')">
+        <h2>Python</h2>
+        <p>Programming</p>
+    </div>
+
+    <div class="language-card java-card" onclick="selectLanguage('Java')">
+        <h2>Java</h2>
+        <p>Programming</p>
+    </div>
+
+</section>
+
+<div class="chat-container">
+
+    <div class="chat-header">
+        <h2>💬 Ask a Question</h2>
+        <p id="selected-language">
+            Hi! Ask me about loops, arrays, functions, programs, and more...
+        </p>
+    </div>
+
+    <div id="chat-box" class="chat-box">
+        <div class="bot-message">
+            👋 Welcome! Select C, Python or Java and ask your programming question.
         </div>
+    </div>
 
-        <div class="language-card python-card" onclick="selectLanguage('Python')">
-            <h2>💚 Python</h2>
-            <p>Learn Python with simple examples</p>
-        </div>
-
-        <div class="language-card java-card" onclick="selectLanguage('Java')">
-            <h2>💙 Java</h2>
-            <p>Learn classes, objects and programs</p>
-        </div>
-    </section>
-
-    <div class="chat-container">
-
-        <div class="chat-header">
-            <h2>💬 Ask a Question</h2>
-            <p id="selected-language">Select C, Python or Java to start</p>
-        </div>
-
-        <div id="chat-box" class="chat-box">
-            <div class="bot-message">
-                👋 Hi! Welcome to Programming AI Chatbot.<br><br>
-                Select a programming language above and ask me any coding question!
-            </div>
-        </div>
-
-        <div class="input-area">
-            <input type="text" id="user-input"
-                   placeholder="Ask your programming question...">
-            <button onclick="sendMessage()">Send ➤</button>
-        </div>
-
+    <div class="input-area">
+        <input type="text" id="user-input"
+               placeholder="Ask your question...">
+        <button onclick="sendMessage()">Send ➤</button>
     </div>
 
 </div>
-
-<script>
-
-let selectedLang = "";
-
-function selectLanguage(lang) {
-    selectedLang = lang;
-
-    document.getElementById("selected-language").innerText =
-        "✨ Selected Language: " + lang;
-
-    addBotMessage("You selected " + lang + " 💻. Ask me anything about " + lang + "!");
-}
-
-function sendMessage() {
-    const input = document.getElementById("user-input");
-    const question = input.value.trim();
-
-    if (question === "") return;
-
-    addUserMessage(question);
-    input.value = "";
-
-    if (selectedLang === "") {
-        addBotMessage("😊 Please select C, Python or Java first!");
-        return;
-    }
-
-    setTimeout(() => {
-        const answer = getAnswer(selectedLang, question);
-        addBotMessage(answer);
-    }, 300);
-}
-
-function addUserMessage(message) {
-    const chatBox = document.getElementById("chat-box");
-    const div = document.createElement("div");
-    div.className = "user-message";
-    div.textContent = message;
-    chatBox.appendChild(div);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function addBotMessage(message) {
-    const chatBox = document.getElementById("chat-box");
-    const div = document.createElement("div");
-    div.className = "bot-message";
-    div.textContent = message;
-    chatBox.appendChild(div);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function getAnswer(lang, q) {
-    const question = q.toLowerCase();
-
-    if (/^(hi|hello|hey|hii|hai)\b/.test(question)) {
-        return "Hello! 👋 Welcome to Programming AI! Ask me about " + lang + " programming, concepts, code or examples.";
-    }
-
-    if (question.includes("loop")) {
-        if (lang === "Python") {
-            return `LOOPS IN PYTHON 🐍
-
-Loops repeat a block of code.
-
-Types:
-1. for loop
-2. while loop
-
-Example:
-for i in range(1, 6):
-    print(i)
-
-Output:
-1
-2
-3
-4
-5`;
-        }
-
-        if (lang === "C") {
-            return `LOOPS IN C 🧡
-
-Loops repeat statements.
-
-Types:
-1. for loop
-2. while loop
-3. do-while loop
-
-Example:
-for(int i=1; i<=5; i++) {
-    printf("%d\\n", i);
-}
-
-Output:
-1
-2
-3
-4
-5`;
-        }
-
-        if (lang === "Java") {
-            return `LOOPS IN JAVA 💙
-
-Loops repeat statements.
-
-Types:
-1. for loop
-2. while loop
-3. do-while loop
-
-Example:
-for(int i=1; i<=5; i++) {
-    System.out.println(i);
-}
-
-Output:
-1
-2
-3
-4
-5`;
-        }
-    }
-
-    if (question.includes("array")) {
-        return lang + " ARRAYS 📚\\n\\nAn array stores multiple values in one variable.\\n\\nArrays are useful for storing and accessing collections of data.\\n\\nAsk me for an array program if you want an example!";
-    }
-
-    if (question.includes("function")) {
-        return lang + " FUNCTIONS ✨\\n\\nA function is a reusable block of code that performs a particular task.\\n\\nFunctions help reduce repeated code and make programs easier to organize.";
-    }
-
-    if (question.includes("variable")) {
-        return lang + " VARIABLES 📝\\n\\nA variable is a named location used to store data.\\n\\nExample values: 10, 3.5, or a name such as Aishu.";
-    }
-
-    if (question.includes("add") || question.includes("addition")) {
-        if (lang === "Python") {
-            return `PYTHON ADDITION PROGRAM 🐍
-
-a = 10
-b = 20
-sum = a + b
-print(sum)
-
-Output:
-30`;
-        }
-
-        if (lang === "C") {
-            return `C ADDITION PROGRAM 🧡
-
-#include <stdio.h>
-int main() {
-    int a=10, b=20;
-    printf("%d", a+b);
-    return 0;
-}
-
-Output:
-30`;
-        }
-
-        if (lang === "Java") {
-            return `JAVA ADDITION PROGRAM 💙
-
-class Main {
-    public static void main(String[] args) {
-        int a=10, b=20;
-        System.out.println(a+b);
-    }
-}
-
-Output:
-30`;
-        }
-    }
-
-    if (question.includes("class") || question.includes("object")) {
-        if (lang === "Java") {
-            return "JAVA CLASS & OBJECT 💙\\n\\nClass: A blueprint used to create objects.\\nObject: An instance of a class.\\n\\nExample:\\nclass Student { }\\n\\nStudent s = new Student();";
-        }
-        return lang + " PROGRAMMING 📚\\n\\nAsk me about variables, functions, loops, arrays or basic programs.";
-    }
-
-    if (question.includes("pointer")) {
-        if (lang === "C") {
-            return "POINTER IN C 🧡\\n\\nA pointer is a variable that stores the memory address of another variable.\\n\\nExample:\\nint a = 10;\\nint *p = &a;";
-        }
-        return "Pointers are mainly taught in C. Ask me about variables, loops, arrays or functions in " + lang + ".";
-    }
-
-    if (question.includes("program")) {
-        return "💡 I can help you with " + lang + " programs!\\n\\nTry asking:\\n• Addition program\\n• Even or odd\\n• Factorial\\n• Fibonacci series\\n• Reverse a number";
-    }
-
-    return "✨ I can help with " + lang + "!\\n\\nTry asking about:\\n• Loops\\n• Arrays\\n• Functions\\n• Variables\\n• Programs\\n• " + (lang === "C" ? "Pointers" : lang === "Java" ? "Classes and objects" : "Lists and strings") + "\\n\\nType a topic to learn more 😊";
-}
-
-document.getElementById("user-input").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
-});
-
-</script>
-
-</body>
-</html>
