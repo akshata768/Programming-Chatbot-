@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Chatbot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="chat-container">
+        <header>
+            <h1>💻 Programming Chatbot</h1>
+            <p>Learn C, Python & Java</p>
+        </header>
+
+        <div class="language-select">
+            <select id="language">
+                <option value="C">C Programming</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+            </select>
+        </div>
+
+        <div id="chat-box">
+            <div class="bot-message">
+                Hello! 👋 I am your Programming Assistant.
+                Ask me anything about C, Python, or Java!
+            </div>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="user-input"
+                   placeholder="Ask a programming question...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById("chat-box");
+        const userInput = document.getElementById("user-input");
+
+        function sendMessage() {
+            const question = userInput.value.trim();
+            const language = document.getElementById("language").value;
+
+            if (question === "") return;
+
+            addMessage(question, "user-message");
+
+            const answer = getAnswer(language, question.toLowerCase());
+
+            setTimeout(() => {
+                addMessage(answer, "bot-message");
+            }, 300);
+
+            userInput.value = "";
+        }
+
+        function addMessage(text, className) {
+            const message = document.createElement("div");
+            message.className = className;
+            message.textContent = text;
+            chatBox.appendChild(message);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function getAnswer(language, question) {
+            if (question.includes("hello") || question.includes("hi")) {
+                return "Hello! 😊 What do you want to learn in " + language + "?";
+            }
+
+            if (question.includes("loop")) {
+                if (language === "C")
+                    return "C has three loops: for, while, and do-while.";
+                if (language === "Python")
+                    return "Python has two loops: for and while.";
+                return "Java supports for, while, and do-while loops.";
+            }
+
+            if (question.includes("array")) {
+                return "An array stores multiple values of the same data type in one variable.";
+            }
+
+            if (question.includes("function") || question.includes("method")) {
+                if (language === "C")
+                    return "A function is a reusable block of code used to perform a task.";
+                if (language === "Python")
+                    return "A Python function is created using the def keyword.";
+                return "A Java method is a block of code that performs a particular task.";
+            }
+
+            if (question.includes("class")) {
+                return "A class is a blueprint used to create objects. It is an important concept in Java.";
+            }
+
+            if (question.includes("object")) {
+                return "An object is an instance of a class. It can contain data and methods.";
+            }
+
+            if (question.includes("pointer")) {
+                if (language === "C")
+                    return "A pointer is a variable that stores the memory address of another variable.";
+                return "Pointers are a concept mainly associated with C and C++. " +
+                       language + " uses its own memory management approach.";
+            }
+
+            if (question.includes("hello world")) {
+                if (language === "C")
+                    return 'Example: printf("Hello World");';
+                if (language === "Python")
+                    return 'Example: print("Hello World")';
+                return 'Example: System.out.println("Hello World");';
+            }
+
+            if (question.includes("variable")) {
+                return "A variable is a named memory location used to store data.";
+            }
+
+            if (question.includes("oops") || question.includes("oop")) {
+                return "OOP means Object-Oriented Programming. Its main concepts include class, object, inheritance, polymorphism, abstraction, and encapsulation.";
+            }
+
+            if (question.includes("definition")) {
+                return language + " is a programming language used to write computer programs.";
+            }
+
+            return "I am your " + language + " programming assistant. Try asking about loops, arrays, functions, variables, or programming concepts.";
+        }
+
+        userInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+
+</body>
+</html>
