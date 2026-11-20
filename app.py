@@ -44,9 +44,11 @@ with st.sidebar:
 
         st.subheader("👥 Team Members")
 
-        st.write("1. Akshata")
-        st.write("2. Team Member 2")
-        st.write("3. Team Member 3")
+        st.write("1. Akshata EM")
+        st.write("2. Kavyashree")
+        st.write("3. Lavanya")
+        st.write("3. Harshita V")
+
 
 st.title("💻 Programming Chatbot")
 st.write("Learn C, Python, and Java in one place!")
